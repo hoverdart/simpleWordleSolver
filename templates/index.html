@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Wordle Solver</title>
+     <style>
+         body {
+            background-image: url("https://img.freepik.com/free-photo/gray-abstract-wireframe-technology-background_53876-101941.jpg?w=2000");
+            background-repeat: no-repeat;
+            background-size: 150% 150%;
+         }
+     </style>
+      <link rel="icon" type="image/x-icon" href="https://i.imgur.com/oMqNtNa.png">
+
+  </head>
+  <body>
+
+  <div class="container bg-secondary p-5">
+    <h1 class="text-white text-center">Wordle Solver</h1>
+      <h5 class="text-white text-center">Need some help with the Wordle? Try using our solver tool! Or cheat. Whatever works for you.</h5>
+      <h5 class="text-white text-center">Try our new Waffle Solver <a href="/waffle">here!</a></h5>
+  </div>
+  <br>
+  <!--The code below is gonna be the error messages!11!-->
+              {% with messages = get_flashed_messages() %}
+                {%if messages%}
+                    {% for message in messages %}
+                        <div class="alert alert-primary alert-dismissible fade show mb-3" role="alert">
+                            {{message}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+              {% endwith %}
+
+        <!--style="text-align:left; justify-content:space-between; vertical-align: middle;"-->
+      <form action="/solve" method="POST">
+          <div class="container">
+            <div class="row text-center border border-success" style="border-width:3px !important;">
+                <span class="text-black"><b>Check each one if the letter is "Green" (has a set placement) on the Wordle.</b></span>
+                 <div class="col">
+                     <input type="checkbox" id="green1" name="green1" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="green2" name="green2" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="green3" name="green3" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="green4" name="green4" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="green5" name="green5" value="True">
+                 </div>
+
+             </div>
+            <br>
+
+            <div class="row">
+                <div class="col"> <!--For reg files, the next column has "select file"-->
+                </div>
+
+                <div class="col"> <!--For reg files, the next column has "select file"-->
+                    <div class="square p-6">
+                        <textarea name="word" MaxLength="5" class="form-control text-center" style="font-size: 50px; height:20px;" id="word" placeholder="Enter Word"></textarea>
+                    </div>
+                </div>
+
+                <div class="col">
+                </div>
+            </div>
+
+             <br>
+             <div class="row">
+                 <div class="col">
+                </div><div class="col">
+                <textarea name="notWork"  class="form-control text-center" style="height:10px;" id="notWork" placeholder="Enter the letters that don't work/are gray."></textarea>
+             </div>
+                 <div class="col">
+                </div>
+
+             </div>
+              <br>
+             <div class="row text-center border border-warning" style="border-width:3px !important;">
+                 <div class="col">
+                     <input type="checkbox" id="yellow1" name="yellow1" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="yellow2" name="yellow2" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="yellow3" name="yellow3" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="yellow4" name="yellow4" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="yellow5" name="yellow5" value="True">
+                 </div>
+                 <span class="text-black text-bold"><b>Check each one if the letter is "Yellow" (has no placement) on the Wordle.</b></span>
+             </div>
+              <br>
+            <div class="row">
+                <button type="submit" name="solve_word" class="btn btn-secondary" style="float: right; width:100%;">Solve!</button>
+            </div>
+        </div>
+      </form>
+  <br>
+  <form action="/cheat" method="POST">
+      <div class="container">
+          <h3 class="text-center">Or, Get the Answer Directly:</h3>
+          <div class="container text-center">
+              <div class="col">
+                <input type="checkbox" id="today" name="the_date" value="today">
+                <label for="today">For Today</label><br>
+              </div>
+              <div class="col">
+                <input type="checkbox" id="tomorrow" name="the_date" value="tomorrow">
+                <label for="tomorrow">For Tomorrow</label><br>
+              </div>
+              <div class="col">
+                  <label for="date">Custom Date:</label>
+                  <input type="date" name="the_date" id="date" min="2022-05-06" max="2027-10-14">
+              </div>
+
+          </div>
+          <br>
+            <button type="submit" name="cheat_lol" class="btn btn-secondary" style="float: right; width:100%;">Cheat!</button>
+      </div>
+  </form>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>

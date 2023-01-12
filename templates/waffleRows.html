@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Wordle Solver</title>
+     <style>
+         body {
+            background-image: url("https://img.freepik.com/free-photo/gray-abstract-wireframe-technology-background_53876-101941.jpg?w=2000");
+            background-repeat: no-repeat;
+            background-size: 150% 150%;
+         }
+     </style>
+      <link rel="icon" type="image/x-icon" href="https://i.imgur.com/oMqNtNa.png">
+
+  </head>
+  <body>
+
+  <div class="container bg-secondary p-5">
+    <h1 class="text-white text-center">Waffle Solver</h1>
+      <h5 class="text-white text-center">Need some help with the Waffle? Try using our solver tool! You can go back to the Wordle Solver <a href="/">here.</a></h5>
+  </div>
+  <br>
+  <!--The code below is gonna be the error messages!11!-->
+              {% with messages = get_flashed_messages() %}
+                {%if messages%}
+                    {% for message in messages %}
+                        <div class="alert alert-primary alert-dismissible fade show mb-3" role="alert">
+                            {{message}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+              {% endwith %}
+
+        <!--style="text-align:left; justify-content:space-between; vertical-align: middle;"-->
+      <form action="/waffle" method="POST">
+          <div class="container">
+              <h5>WORD ON FIRST ROW</h5>
+            <div class="row text-center border border-success" style="border-width:3px !important;">
+                <span class="text-black"><b>Check each one if the letter is "Green" (has a set placement) on the FIRST ROW.</b></span>
+                 <div class="col">
+                     <input type="checkbox" id="r1green1" name="r1green1" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r1green2" name="r1green2" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r1green3" name="r1green3" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r1green4" name="r1green4" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r1green5" name="r1green5" value="True">
+                 </div>
+
+             </div>
+            <br>
+
+            <div class="row">
+                <div class="col"> <!--For reg files, the next column has "select file"-->
+                </div>
+
+                <div class="col"> <!--For reg files, the next column has "select file"-->
+                    <div class="square p-6">
+                        <textarea name="r1word" MaxLength="5" class="form-control text-center" style="font-size: 50px; height:20px;" id="rWordOne" placeholder="1st Row Word"></textarea>
+                    </div>
+                </div>
+
+                <div class="col">
+                </div>
+            </div>
+
+             <br>
+             <div class="row text-center border border-warning" style="border-width:3px !important;">
+                 <div class="col">
+                     <input type="checkbox" id="r1yellow1" name="r1yellow1" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r1yellow2" name="r1yellow2" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r1yellow3" name="r1yellow3" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r1yellow4" name="r1yellow4" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r1yellow5" name="r1yellow5" value="True">
+                 </div>
+                 <span class="text-black text-bold"><b>Check each one if the letter is "Yellow" on the FIRST ROW.</b></span>
+             </div>
+              <br>
+        </div>
+
+        <br>
+          <div class="container">
+              <h5>WORD ON SECOND ROW</h5>
+            <div class="row text-center border border-success" style="border-width:3px !important;">
+
+                <span class="text-black"><b>Check each one if the letter is "Green" on the SECOND ROW.</b></span>
+                 <div class="col">
+                     <input type="checkbox" id="r2green1" name="r2green1" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r2green2" name="r2green2" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r2green3" name="r2green3" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r2green4" name="r2green4" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r2green5" name="r2green5" value="True">
+                 </div>
+
+             </div>
+            <br>
+
+            <div class="row">
+                <div class="col"> <!--For reg files, the next column has "select file"-->
+                </div>
+
+                <div class="col"> <!--For reg files, the next column has "select file"-->
+                    <div class="square p-6">
+                        <textarea name="r2word" MaxLength="5" class="form-control text-center" style="font-size: 50px; height:20px;" id="rWordTwo" placeholder="2nd Row Word"></textarea>
+                    </div>
+                </div>
+
+                <div class="col">
+                </div>
+            </div>
+
+             <br>
+             <div class="row text-center border border-warning" style="border-width:3px !important;">
+                 <div class="col">
+                     <input type="checkbox" id="r2yellow1" name="r2yellow1" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r2yellow2" name="r2yellow2" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r2yellow3" name="r2yellow3" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r2yellow4" name="r2yellow4" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r2yellow5" name="r2yellow5" value="True">
+                 </div>
+                 <span class="text-black text-bold"><b>Check each one if the letter is "Yellow" on the SECOND ROW.</b></span>
+             </div>
+              <br>
+        </div>
+
+            <br>
+          <div class="container">
+              <h5>WORD ON THIRD ROW</h5>
+            <div class="row text-center border border-success" style="border-width:3px !important;">
+                <span class="text-black"><b>Check each one if the letter is "Green" on the THIRD ROW.</b></span>
+                 <div class="col">
+                     <input type="checkbox" id="r3green1" name="r3green1" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r3green2" name="r3green2" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r3green3" name="r3green3" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r3green4" name="r3green4" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r3green5" name="r3green5" value="True">
+                 </div>
+
+             </div>
+            <br>
+
+            <div class="row">
+                <div class="col"> <!--For reg files, the next column has "select file"-->
+                </div>
+
+                <div class="col"> <!--For reg files, the next column has "select file"-->
+                    <div class="square p-6">
+                        <textarea name="r3word" MaxLength="5" class="form-control text-center" style="font-size: 50px; height:20px;" id="rWordThree" placeholder="3rd Row Word"></textarea>
+                    </div>
+                </div>
+
+                <div class="col">
+                </div>
+            </div>
+
+             <br>
+             <div class="row text-center border border-warning" style="border-width:3px !important;">
+                 <div class="col">
+                     <input type="checkbox" id="r3yellow1" name="r3yellow1" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r3yellow2" name="r3yellow2" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r3yellow3" name="r3yellow3" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r3yellow4" name="r3yellow4" value="True">
+                 </div>
+                 <div class="col">
+                     <input type="checkbox" id="r3yellow5" name="r3yellow5" value="True">
+                 </div>
+                 <span class="text-black text-bold"><b>Check each one if the letter is "Yellow" on the THIRD ROW.</b></span>
+             </div>
+              <br>
+            <div class="row">
+                <button type="submit" name="solve_word" class="btn btn-secondary" style="float: right; width:100%;">Next (to the Columns)</button>
+            </div>
+        </div>
+
+
+      </form>
+  <br>
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
